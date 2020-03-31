@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <div class="frame">
+        <div class="frame-header">
+            <p>Daily Production Data Entry-DCH</p>
+        </div>
+        <div class="frame-body">
+            <div class="production">
+                <div class="date-div">
+                    <span>Production Date</span>
+                    <input type="date" name="date" id="pdate">
+                </div>
+                <div class="table-container">
+                    <table id="tbl-coal">
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Coal Production</p>
+                            </td>
+    
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Grade G-08</p>
+                            </td>
+                            <td><input type="number" name="g8" id="g8"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Grade G-10-SD</p>
+                            </td>
+                            <td><input type="number" name="g10sd" id="g10sd"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Grade G-10-SM</p>
+                            </td>
+                            <td><input type="number" name="g10sm" id="g10sm"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Coal SD</p>
+                            </td>
+                            <td>
+                                <p id="coalsd"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Coal SM</p>
+                            </td>
+                            <td>
+                                <p id="coalsm"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Coal Prod</p>
+                            </td>
+                            <td>
+                                <p id="totalcoal"></p>
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>OB Shovel-Dumper</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Ob Shovel East</p>
+                            <td><input type="number" name="depteast" id="depteast"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Ob Shovel West</p>
+                            <td><input type="number" name="deptwest" id="deptwest"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Ob Shovel Coal</p>
+                            <td><input type="number" name="deptcoal" id="deptcoal"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total OB Shovel</p>
+                            <td>
+                                <p id="obsd"></p>
+                            </td>
+                            </td>
+                        </tr>
+                    </table>
+    
+                    <table id="tbl-dl">
+                        
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Dragline OB</p>
+                            </td>
+    
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Jwala Dl Solid</p>
+                            <td><input type="number" name="jwalasolid" id="jwalasolid"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Vindhya Dl Solid</p>
+                            <td><input type="number" name="vindhyasolid" id="vindhyasolid"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Jyoti Dl Solid</p>
+                            <td><input type="number" name="jyotisolid" id="jyotisolid"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Pawan Dl Solid</p>
+                            <td><input type="number" name="pawansolid" id="pawansolid"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total OB Dragline</p>
+                            <td>
+                                <p id="obdl"></p>
+                            </td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Jwala Dl Reh</p>
+                            <td><input type="number" name="jwalareh" id="jwalareh"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Vindhya Dl Reh</p>
+                            <td><input type="number" name="vindhyareh" id="vindhyareh"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Jyoti Dl Reh</p>
+                            <td><input type="number" name="jyotireh" id="jyotireh"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Pawan Dl Reh</p>
+                            <td><input type="number" name="pawanreh" id="pawanreh"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Reh Dragline</p>
+                            <td>
+                                <p id="dlreh"></p>
+                            </td>
+                            </td>
+                        </tr>
+                        
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Total Dept OB Removal</p>
+                            </td>
+    
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <p>Total Dept OB</p>
+                            <td>
+                                <p id="deptob">
+                            </td>
+                            </td>
+                        </tr>
+    
+                    </table>
+                    <table id="tbl-os">
+                        
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Outsourcing OB</p>
+                            </td>
+    
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Out East Top</p>
+                            <td><input type="number" name="outeasttop" id="outeasttop"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Out West Top</p>
+                            <td><input type="number" name="outwesttop" id="outwesttop"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Out East Mid</p>
+                            <td><input type="number" name="outeastmid" id="outeastmid"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Out West Mid</p>
+                            <td><input type="number" name="outwestmid" id="outwestmid"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Out Dl East</p>
+                            <td><input type="number" name="outeastdl" id="outeastdl"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Out Dl West</p>
+                            <td><input type="number" name="outwestdl" id="outwestdl"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Out OB</p>
+                            <td>
+                                <p id="outob"></p>
+                            </td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>OB (Dept+Out)</p>
+                            <td>
+                                <p id="totalob"></p>
+                            </td>
+                            </td>
+                        </tr>
+    
+                    </table>
+                    <table id="tbl-desp">
+                        
+                        <tr class="head">
+                            <td colspan="2">
+                                <p> Coal Despatch </p>
+                            </td>
+    
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Silo G-08</p>
+                            <td>
+                                <p id="silog8"></p>
+                            </td>
+                            </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Silo G-10 </p>
+                            <td>
+                                <p id="silog10"></p>
+                            </td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Silo</p>
+                            <td><input type="number" name="totalsilo" id="totalsilo"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>WharfWall G-10</p>
+                            <td><input type="number" name="wwg10" id="wwg10"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Road G-10</p>
+                            <td><input type="number" name="roadg10" id="roadg10"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Despatch</p>
+                            <td>
+                                <p id="totaldesp"></p>
+                            </td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Coal Recv JNT-WW G-10</p>
+                            <td><input type="number" name="rwwg10" id="rwwg10"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Coal Recv JNT CHP G-10</p>
+                            <td><input type="number" name="rchpg10" id="rchpg10"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Net Despatch</p>
+                            <td>
+                                <p id="netdesp"></p>
+                            </td>
+                            </td>
+                        </tr>
+                     
+                    </table>
+                </div>
+                
+  
+            </div>
+            <div class="hemm">
+                <div class="date-div">
+                    <span>Working Date</span>
+                    <input type="date" id="hdate">
+                </div>
+                <div class="table-container">
+                    <table id="tbl-dl-w">
+                        
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Dragline</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Available Hours</p>
+                            </td>
+                            <td><input type="number" name="dlavl" id="dlavl"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Working Hours</p>
+                            </td>
+                            <td><input type="number" name="dlutl" id="dlutl"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Avl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="dlah"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Utl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="dlwh"></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="tbl-sh-w">
+                        
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Shovel</p>
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Not Survey-Off</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Available Hours</p>
+                            </td>
+                            <td><input type="number" name="shvavl" id="shvavl"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Working Hours</p>
+                            </td>
+                            <td><input type="number" name="shvutl" id="shvutl"></td>
+                        </tr>
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Survey-Off</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Working Hours</p>
+                            </td>
+                            <td><input type="number" name="shvutls" id="shvutls"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Avl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="shvah"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Utl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="shvwh"></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="tbl-85t">
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>85 Te WS</p>
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Not Survey-Off</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Available Hours</p>
+                            </td>
+                            <td><input type="number" name="d85avl" id="d85avl"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Working Hours</p>
+                            </td>
+                            <td><input type="number" name="d85utl" id="d85utl"></td>
+                        </tr>
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Survey-Off</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Working Hours</p>
+                            </td>
+                            <td><input type="number" name="d85utls" id="d85utls"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Avl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="d85ah"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Utl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="d85wh"></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="tbl-120t">
+                        
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>120 Te WS</p>
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Not Survey-Off</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Available Hours</p>
+                            </td>
+                            <td><input type="number" name="d120avl" id="d120avl"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Working Hours</p>
+                            </td>
+                            <td><input type="number" name="d120utl" id="d120utl"></td>
+                        </tr>
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Survey-Off</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Working Hours</p>
+                            </td>
+                            <td><input type="number" name="d120utls" id="d120utls"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Avl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="d120ah"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Utl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="d120wh"></p>
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Dumper</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Dumper Avl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="dumperah"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Dumper Utl Hrs</p>
+                            </td>
+                            <td>
+                                <p id="dumperwh"></p>
+                            </td>
+                        </tr>
+                     
+                    </table>
+                </div>
+              
+         
+            </div>
+            <div class="others">
+                <div class="date-div">
+
+                    <span>Production Date</span>
+                    <input type="date" name="date" id="odate">
+                </div>
+                <div class="table-container">
+                    <table id="tbl-others">
+                        
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Other Information</p>
+                            </td>
+    
+                        </tr>
+    
+                        <tr>
+                            <td>
+                                <p>Manpower</p>
+                            </td>
+                            <td><input type="number" name="mp" id="mp"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Explosives</p>
+                            </td>
+                            <td><input type="number" name="exp" id="exp"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Rainfall</p>
+                            </td>
+                            <td><input type="number" name="rf" id="rf"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Drilling OB</p>
+                            </td>
+                            <td><input type="number" name="drillob" id="drillob"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Drilling Coal</p>
+                            </td>
+                            <td><input type="number" name="drillcoal" id="drillcoal"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Total Drilling</p>
+                            </td>
+                            <td>
+                                <p id="totaldrill"></p>
+                            </td>
+                        </tr>
+                    </table>
+    
+                    <table id="tbl-tran">
+                        
+                        <tr class="head">
+                            <td colspan="2">
+                                <p>Coal Transportation</p>
+                            </td>
+    
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>From Surface Miner</p>
+                            <td><input type="number" name="smtrans" id="smtrans"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>From Mobile Crusher</p>
+                            <td><input type="number" name="mctrans" id="mctrans"></td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>CHP Transport</p>
+                            <td><input type="number" name="chptrans" id="chptrans"></td>
+                            </td>
+                        </tr>
+                
+                    </table>
+                </div>
+               
+            
+            </div>
+        </div>
+        <div class="frame-footer">
+            <p>Dudhichua Project</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font: inherit;
+}
+
+html{
+    font-size:1rem;
+}
+
+body{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgb(255, 255, 251);
+}
+
+.frame{
+    width:98vw;
+    border:1px solid lightgrey;
+    border-radius: 3px;
+}
+
+.frame-header{
+    height:5rem;
+    background:rgb(0, 0, 0);
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+    /* font-variant: small-caps; */
+}
+
+.frame-body{
+    display:flex;
+    flex-direction: column;
+}
+
+.frame-footer{
+    height:2rem;
+    background:rgb(148, 127, 240);
+    color:white;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding:0.5rem;
+}
+
+
+
+   input{
+       margin:1rem;
+       width:200px;
+       padding:0.4rem 0.25rem;
+    font-variant: small-caps;
+    border-radius: 2px;
+    border:1px solid lightgrey;
+   }
+
+   td > input{
+       margin:0px;
+    width:100%;
+   }
+
+   table{
+    border-collapse: collapse;
+       /* width:400px; */
+       border:1px solid lightgrey;
+       background:rgb(255, 255, 195);
+       margin:1rem;
+   }
+
+   td{
+       border:1px solid grey;
+       text-align:left;
+       padding:0.25rem;
+   }
+
+   tr td:first-child{
+       text-align:right;
+   }
+
+   tr.head td{
+    text-align:center;
+    font-size:125%;
+    color:blueviolet;
+}
+
+.frame-body > div{
+    margin:1rem;
+    border:2px solid black;
+}
+
+.table-container{
+    display:flex;
+    justify-content: center;
+}
