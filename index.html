@@ -7,6 +7,7 @@
     <title>Production</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js" defer></script>
+    <script src="js/nav.js" defer></script>
 </head>
 
 <body>
@@ -14,19 +15,32 @@
         <div class="frame-header">
             <p>Daily Production Data Entry-DCH</p>
         </div>
+        <div class="nav">
+            <ul class="tabs">
+                <li data-tab=".production" onclick="showTab(this)" class="tab">Production</li>
+                <li data-tab=".hemm" onclick="showTab(this)" class="tab">HEMM</li>
+                <li data-tab=".others" onclick="showTab(this)" class="tab">Other</li>
+            </ul>
+        </div>
+
         <div class="frame-body">
-            <div class="production">
-                <div class="date-div">
-                    <span>Production Date</span>
-                    <input type="date" name="date" id="pdate">
+            <div class="production section">
+                <div class="section-header">
+                    <div class="menu">
+                        <input type="date" name="date" id="pdate">
+                        <button id="fetch">fetch</button>
+                        <button id="submit">submit</button>
+                    </div>
                 </div>
+
+
                 <div class="table-container">
                     <table id="tbl-coal">
                         <tr class="head">
                             <td colspan="2">
                                 <p>Coal Production</p>
                             </td>
-    
+
                         </tr>
                         <tr>
                             <td>
@@ -102,14 +116,14 @@
                             </td>
                         </tr>
                     </table>
-    
+
                     <table id="tbl-dl">
-                        
+
                         <tr class="head">
                             <td colspan="2">
                                 <p>Dragline OB</p>
                             </td>
-    
+
                         </tr>
                         <tr>
                             <td>
@@ -175,14 +189,14 @@
                             </td>
                             </td>
                         </tr>
-                        
+
                         <tr class="head">
                             <td colspan="2">
                                 <p>Total Dept OB Removal</p>
                             </td>
-    
+
                         </tr>
-                        
+
                         <tr>
                             <td>
                                 <p>Total Dept OB</p>
@@ -191,15 +205,15 @@
                             </td>
                             </td>
                         </tr>
-    
+
                     </table>
                     <table id="tbl-os">
-                        
+
                         <tr class="head">
                             <td colspan="2">
                                 <p>Outsourcing OB</p>
                             </td>
-    
+
                         </tr>
                         <tr>
                             <td>
@@ -253,15 +267,15 @@
                             </td>
                             </td>
                         </tr>
-    
+
                     </table>
                     <table id="tbl-desp">
-                        
+
                         <tr class="head">
                             <td colspan="2">
                                 <p> Coal Despatch </p>
                             </td>
-    
+
                         </tr>
                         <tr>
                             <td>
@@ -326,20 +340,23 @@
                             </td>
                             </td>
                         </tr>
-                     
+
                     </table>
                 </div>
-                
-  
+
+
             </div>
-            <div class="hemm">
-                <div class="date-div">
-                    <span>Working Date</span>
-                    <input type="date" id="hdate">
+            <div class="hemm section">
+                <div class="section-header">
+                    <div class="menu">
+                        <input type="date" name="date" id="hdate">
+                        <button id="fetch">fetch</button>
+                        <button id="submit">submit</button>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table id="tbl-dl-w">
-                        
+
                         <tr class="head">
                             <td colspan="2">
                                 <p>Dragline</p>
@@ -375,7 +392,7 @@
                         </tr>
                     </table>
                     <table id="tbl-sh-w">
-                        
+
                         <tr class="head">
                             <td colspan="2">
                                 <p>Shovel</p>
@@ -478,7 +495,7 @@
                         </tr>
                     </table>
                     <table id="tbl-120t">
-                        
+
                         <tr class="head">
                             <td colspan="2">
                                 <p>120 Te WS</p>
@@ -549,28 +566,30 @@
                                 <p id="dumperwh"></p>
                             </td>
                         </tr>
-                     
+
                     </table>
                 </div>
-              
-         
-            </div>
-            <div class="others">
-                <div class="date-div">
 
-                    <span>Production Date</span>
-                    <input type="date" name="date" id="odate">
+
+            </div>
+            <div class="others section">
+                <div class="section-header">
+                    <div class="menu">
+                        <input type="date" name="date" id="pdate">
+                        <button id="fetch">fetch</button>
+                        <button id="submit">submit</button>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table id="tbl-others">
-                        
+
                         <tr class="head">
                             <td colspan="2">
                                 <p>Other Information</p>
                             </td>
-    
+
                         </tr>
-    
+
                         <tr>
                             <td>
                                 <p>Manpower</p>
@@ -610,14 +629,14 @@
                             </td>
                         </tr>
                     </table>
-    
+
                     <table id="tbl-tran">
-                        
+
                         <tr class="head">
                             <td colspan="2">
                                 <p>Coal Transportation</p>
                             </td>
-    
+
                         </tr>
                         <tr>
                             <td>
@@ -637,11 +656,11 @@
                             <td><input type="number" name="chptrans" id="chptrans"></td>
                             </td>
                         </tr>
-                
+
                     </table>
                 </div>
-               
-            
+
+
             </div>
         </div>
         <div class="frame-footer">
@@ -649,4 +668,5 @@
         </div>
     </div>
 </body>
+
 </html>

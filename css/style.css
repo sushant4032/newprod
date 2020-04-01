@@ -117,3 +117,54 @@ tr:nth-child(even){
 tr:nth-child(odd){
     background:rgb(255,255,195);
 }
+
+
+button{
+	width:100px;
+	margin:0.25rem;
+	padding: 0.5rem;
+	cursor:pointer;
+	background:rgb(0, 182, 0);
+	color:white;
+	border:none;
+	border-radius:3px;
+}
+
+button:hover{
+	background:rgb(0, 138, 0);
+}
+
+
+ul{
+	list-style: none;
+}
+
+
+.nav{
+	display:flex;
+	justify-content: center;
+	background:#333;
+}
+.tabs{
+	display:flex;
+
+}
+
+.tab{
+	width:120px;
+	text-align: center;
+	padding:0.5rem;
+	cursor:pointer;
+	border-radius: 5px 5px 0 0;
+	color:white;
+}
+
+.active-tab{
+	border-bottom:none;
+	background:#fff;
+	color:#333;
+}
+
+.hidden{
+	display:none;
+}
