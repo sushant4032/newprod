@@ -16,21 +16,27 @@
             <p>Daily Production Data Entry-DCH</p>
         </div>
         <div class="nav">
-            <ul class="tabs">
+            <div>
+                <input type="date" name="date" id="date">
+                <button id="fetch">fetch</button>
+            </div>
+
+            <!-- <ul class="tabs">
                 <li data-tab=".production" onclick="showTab(this)" class="tab">Production</li>
                 <li data-tab=".hemm" onclick="showTab(this)" class="tab">HEMM</li>
                 <li data-tab=".others" onclick="showTab(this)" class="tab">Other</li>
-            </ul>
+            </ul> -->
+
+            <div>
+                <button id="submit">submit</button>
+            </div>
         </div>
+
 
         <div class="frame-body">
             <div class="production section">
                 <div class="section-header">
-                    <div class="menu">
-                        <input type="date" name="date" id="pdate">
-                        <button id="fetch">fetch</button>
-                        <button id="submit">submit</button>
-                    </div>
+                    <span>Production data for:</span><span class="pdate-disp">23-3-2019</span>
                 </div>
 
 
@@ -348,11 +354,9 @@
             </div>
             <div class="hemm section">
                 <div class="section-header">
-                    <div class="menu">
-                        <input type="date" name="date" id="hdate">
-                        <button id="fetch">fetch</button>
-                        <button id="submit">submit</button>
-                    </div>
+
+                    <span>HEMM data for:</span><span class="hdate-disp">23-3-2019</span>
+
                 </div>
                 <div class="table-container">
                     <table id="tbl-dl-w">
@@ -573,13 +577,11 @@
 
             </div>
             <div class="others section">
+
                 <div class="section-header">
-                    <div class="menu">
-                        <input type="date" name="date" id="pdate">
-                        <button id="fetch">fetch</button>
-                        <button id="submit">submit</button>
-                    </div>
+                    <span>Other data for:</span><span class="odate-disp">23-3-2019</span>
                 </div>
+
                 <div class="table-container">
                     <table id="tbl-others">
 
