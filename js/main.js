@@ -1,5 +1,6 @@
 const fields = document.querySelectorAll('table input');
 const dateField = document.querySelector('#date');
+const status = document.querySelector('#status');
 const values = {};
 const calculated = {};
 let date = "";
@@ -9,41 +10,56 @@ document.querySelectorAll('input').forEach(function (x) {
     x.addEventListener('change', calculate);
 });
 
+dateField.addEventListener('change', getDate);
+
 start();
+// dummy();
 
 function start() {
-    dateField.value = new Date().toISOString().slice(0, 10);
-    updateDates();
+    const a = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
+    const b = new Date().getTime();
+    dn = Math.ceil((b - a) / (24 * 3600 * 1000));
+    setDate();
+    // getDate();
 }
 
-function updateDates() {
-    date = dateField.value;
-    dn = date2number(date);
-    const pdn = dn - 1;
-    const hdn = dn - 2;
-    document.querySelector('.pdate-disp').innerHTML = formatedDate(pdn);
-    document.querySelector('.hdate-disp').innerHTML = formatedDate(hdn);
-    document.querySelector('.odate-disp').innerHTML = formatedDate(pdn);
-}
-
-function date2number(dt) {
+function getDate() {
+    const dt = dateField.value;
     const a = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
     const b = new Date(dt).getTime();
-    return Math.ceil((b - a) / (24 * 3600 * 1000))
+    dn = Math.ceil((b - a) / (24 * 3600 * 1000));
+    console.log(dn);
+    date = readableDate(dn);
+    getData();
 }
 
-function number2date(dn) {
+function setDate() {
     const a = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
-    return new Date(a + (dn - 1) * (24 * 3600 * 1000));
+    const b = new Date(a + (dn - 1) * (24 * 3600 * 1000));
+    console.log(b,b.toISOString().slice(0, 10));
+    dateField.value = b.toISOString().slice(0, 10);
+    console.log(new Date(dateField.value));
+    const pdn = dn - 1;
+    const hdn = dn - 2;
+    document.querySelector('.pdate-disp').innerHTML = readableDate(pdn);
+    document.querySelector('.hdate-disp').innerHTML = readableDate(hdn);
+    document.querySelector('.odate-disp').innerHTML = readableDate(pdn);
 }
 
-function formatedDate(dn) {
-    const a = new Date(number2date(dn));
-    return a.toString().slice(0, 15);
+function readableDate(dn) {
+    const a = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
+    const b = new Date(a + (dn - 1) * (24 * 3600 * 1000));
+    return b.toString().slice(0, 15);
+}
+
+function resetFields() {
+    fields.forEach(x => {
+        x.value = "";
+    });
+    calculate();
 }
 
 function calculate() {
-    updateDates();
 
     fields.forEach(x => {
         values[x.id] = +x.value;
@@ -78,6 +94,45 @@ function calculate() {
     }
 }
 
+function getData() {
+    
+    console.log('Fetching data for' + readableDate(dn));
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', './serv/get.php');
+    xhr.send();
+    fields.forEach(x => {
+        x.val = 0;
+    });
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const rs = this.responseText;
+            const a = rs.indexOf("#[");
+            const b = rs.indexOf(']#');
+            const res = rs.slice(a + 1, b + 1);
+            const rows = JSON.parse(res);
+            let found = false;
+            rows.forEach(x => {
+                if (x.dn == dn) {
+                    const k = JSON.parse(x.val);
+                    for (y of Object.keys(k)) {
+                        document.querySelector('#' + y).value = k[y];
+                    }
+                    calculate();
+
+                    found = true;
+                }
+            })
+            if (found) {
+                log('Data available for ' + date);
+            }
+            else {
+                log('No data for ' + date);
+            }
+        }
+    }
+    resetFields();
+}
+
 function submit() {
     const xhr = new XMLHttpRequest();
     const data = {
@@ -85,11 +140,22 @@ function submit() {
         'dt': date,
         'val': JSON.stringify(values)
     }
-    xhr.open('POST', './serv/prod.php', true);
+    xhr.open('POST', './serv/sub.php', true);
     xhr.send(JSON.stringify(data));
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+            console.log(this.response);
         }
+    }
+}
+
+function log(txt) {
+    status.value = txt;
+}
+
+function dummy() {
+    console.log(readableDate(1));
+    for (i = 1; i <= 10; i++) {
+        dateField.value = readableDate(i);
     }
 }

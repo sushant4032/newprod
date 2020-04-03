@@ -16,10 +16,16 @@
             <p>Daily Production Data Entry-DCH</p>
         </div>
         <div class="nav">
-            <div>
+            <div id="date-container">
                 <input type="date" name="date" id="date">
-                <button id="fetch">fetch</button>
             </div>
+            <div id="status-container">
+                <input type="text" id="status" disabled>
+            </div>
+            <div id="submit-container">
+                <button id="submit" onclick="submit()">submit</button>
+            </div>
+
 
             <!-- <ul class="tabs">
                 <li data-tab=".production" onclick="showTab(this)" class="tab">Production</li>
@@ -27,9 +33,6 @@
                 <li data-tab=".others" onclick="showTab(this)" class="tab">Other</li>
             </ul> -->
 
-            <div>
-                <button id="submit" onclick="submit()">submit</button>
-            </div>
         </div>
 
 
