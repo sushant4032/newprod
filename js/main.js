@@ -1,56 +1,101 @@
 const fields = document.querySelectorAll('table input');
 const dateField = document.querySelector('#date');
-const status = document.querySelector('#status');
+const statusField = document.querySelector('#status');
+const begining = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
 const values = {};
 const calculated = {};
 let date = "";
 let dn = 0;
 
+
 document.querySelectorAll('input').forEach(function (x) {
     x.addEventListener('change', calculate);
 });
 
-dateField.addEventListener('change', getDate);
+dateField.addEventListener('change', readDate);
 
 start();
-// dummy();
 
-function start() {
-    const a = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
-    const b = new Date().getTime();
-    dn = Math.ceil((b - a) / (24 * 3600 * 1000));
+async function start() {
+    dn = Math.floor((new Date().getTime() - begining) / (24 * 3600 * 1000));
     setDate();
-    // getDate();
-}
-
-function getDate() {
-    const dt = dateField.value;
-    const a = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
-    const b = new Date(dt).getTime();
-    dn = Math.ceil((b - a) / (24 * 3600 * 1000));
-    console.log(dn);
-    date = readableDate(dn);
+    show('Fetching server data');
+    await downloadServerData();
     getData();
 }
 
 function setDate() {
-    const a = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
-    const b = new Date(a + (dn - 1) * (24 * 3600 * 1000));
-    console.log(b,b.toISOString().slice(0, 10));
-    dateField.value = b.toISOString().slice(0, 10);
-    console.log(new Date(dateField.value));
-    const pdn = dn - 1;
-    const hdn = dn - 2;
-    document.querySelector('.pdate-disp').innerHTML = readableDate(pdn);
-    document.querySelector('.hdate-disp').innerHTML = readableDate(hdn);
-    document.querySelector('.odate-disp').innerHTML = readableDate(pdn);
+    dateField.value = formattedDate(dn);
+    document.querySelector('.pdate-disp').innerHTML = readableDate(dn - 1);
+    document.querySelector('.hdate-disp').innerHTML = readableDate(dn - 2);
+    document.querySelector('.odate-disp').innerHTML = readableDate(dn - 1);
 }
 
-function readableDate(dn) {
-    const a = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
-    const b = new Date(a + (dn - 1) * (24 * 3600 * 1000));
-    return b.toString().slice(0, 15);
+function formattedDate(dn) {
+    const a = new Date(begining + (dn * 24 * 3600 * 1000));
+    const b = a.getFullYear().toString() + "-" + (a.getMonth() + 1).toString().padStart(2, '0')
+        + "-" + a.getDate().toString().padStart(2, '0');
+    return b;
 }
+
+function getData() {
+    const currentDateData = JSON.parse(localStorage.getItem(dn));
+    resetFields();
+    if (currentDateData) {
+        show('Data found for ' + readableDate(dn));
+        console.log(currentDateData);
+        for (x of Object.keys(currentDateData)) {
+            document.querySelector('#' + x).value = currentDateData[x];
+        }
+        calculate();
+    }
+    else {
+        show('Data not available for ' + readableDate(dn));
+    }
+}
+
+function downloadServerData() {
+    promise = new Promise((resolve, reject)=>{
+        let count = 0;
+        localStorage.clear();
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', './serv/get.php');
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const rs = this.responseText;
+                const a = rs.indexOf("#[");
+                const b = rs.indexOf(']#');
+                const res = rs.slice(a + 1, b + 1);
+                const rows = JSON.parse(res);
+                rows.forEach(x => {
+                    localStorage.setItem(x.dn, x.val);
+                    count++;
+                });
+                show(`Fetched ${count} entries `);
+                resolve();
+            }
+        }
+    });
+    return promise;
+}
+
+function readDate() {
+    const dt = dateField.value;
+    const a = new Date(2018, 3, 1, 0, 6, 0, 0).getTime();
+    const b = new Date(dt).getTime();
+    dn = Math.floor((b - a) / (24 * 3600 * 1000));
+    date = formattedDate(dn);
+    getData();
+}
+
+
+
+function readableDate(dn) {
+    return new Date(begining + (dn * 24 * 3600 * 1000)).toDateString();
+}
+
+
 
 function resetFields() {
     fields.forEach(x => {
@@ -94,44 +139,7 @@ function calculate() {
     }
 }
 
-function getData() {
-    
-    console.log('Fetching data for' + readableDate(dn));
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', './serv/get.php');
-    xhr.send();
-    fields.forEach(x => {
-        x.val = 0;
-    });
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            const rs = this.responseText;
-            const a = rs.indexOf("#[");
-            const b = rs.indexOf(']#');
-            const res = rs.slice(a + 1, b + 1);
-            const rows = JSON.parse(res);
-            let found = false;
-            rows.forEach(x => {
-                if (x.dn == dn) {
-                    const k = JSON.parse(x.val);
-                    for (y of Object.keys(k)) {
-                        document.querySelector('#' + y).value = k[y];
-                    }
-                    calculate();
 
-                    found = true;
-                }
-            })
-            if (found) {
-                log('Data available for ' + date);
-            }
-            else {
-                log('No data for ' + date);
-            }
-        }
-    }
-    resetFields();
-}
 
 function submit() {
     const xhr = new XMLHttpRequest();
@@ -149,13 +157,19 @@ function submit() {
     }
 }
 
-function log(txt) {
-    status.value = txt;
+function show(txt) {
+    statusField.value = txt;
+    console.log(txt);
 }
 
 function dummy() {
-    console.log(readableDate(1));
-    for (i = 1; i <= 10; i++) {
-        dateField.value = readableDate(i);
+    const k = dn;
+    for (i = k - 50; i <= k + 50; i++) {
+        dn = i;
+        date = formattedDate(dn);
+        for (x of Object.keys(values)) {
+            values[x] = Math.floor(100 * Math.random());
+        }
+        submit();
     }
 }
